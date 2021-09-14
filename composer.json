@@ -1,0 +1,20 @@
+{
+  "name": "jeffesonmaia/asp-test",
+  "description": "User CLI",
+  "authors": [
+    {
+      "name": "Jeffeson Pinheiro",
+      "email": "jeffeson.maia.pinheiro@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ASPTest\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}
