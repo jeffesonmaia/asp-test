@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  app:
+    container_name: 'asp-test'
+    build: ./
+    image: php:7.3-cli
+    working_dir: /usr/src/asp-test
+    environment:
+      docker: "true"
+    volumes:
+      - .:/usr/src/asp-test
