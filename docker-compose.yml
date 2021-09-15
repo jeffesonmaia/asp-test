@@ -9,3 +9,16 @@ services:
       docker: "true"
     volumes:
       - .:/usr/src/asp-test
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    container_name: 'asp-test-db'
+    restart: on-failure
+    image: mariadb
+    env_file:
+      - .env
+    ports:
+      - 3307:3307
