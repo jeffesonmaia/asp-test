@@ -2,8 +2,11 @@ version: '3.8'
 services:
   app:
     container_name: 'asp-test'
+    restart: always
+    image: php:7.4-fpm
     build: ./
-    image: php:7.3-cli
+    env_file:
+      - .env
     working_dir: /usr/src/asp-test
     environment:
       docker: "true"
@@ -16,9 +19,9 @@ services:
 
   db:
     container_name: 'asp-test-db'
-    restart: on-failure
+    restart: always
     image: mariadb
     env_file:
       - .env
     ports:
-      - 3307:3307
+      - "3306:3306"
