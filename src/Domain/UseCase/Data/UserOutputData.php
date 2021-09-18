@@ -1,17 +1,14 @@
 <?php
 
+namespace ASPTest\Domain\UseCase\Data;
+
 class UserOutputData
 {
-    /** @var int */
-    private $id;
-    /** @var string $firstName */
-    private $firstName;
-    /** @var string $lastName */
-    private $lastName;
-    /** @var string $email */
-    private $email;
-    /** @var int $age */
-    private $age;
+    private int $id;
+    private string $firstName;
+    private string $lastName;
+    private string $email;
+    private ?int $age;
 
     public function __construct(int $id, string $firstName, string $lastName, string $email, ?int $age)
     {

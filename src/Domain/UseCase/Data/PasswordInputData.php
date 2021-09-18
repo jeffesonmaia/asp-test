@@ -1,13 +1,13 @@
 <?php
+declare(strict_types=1);
+
+namespace ASPTest\Domain\UseCase\Data;
 
 class PasswordInputData
 {
-    /** @var int */
-    private $id;
-    /** @var string */
-    private $password;
-    /** @var string */
-    private $passwordConfirmation;
+    private int $id;
+    private string $password;
+    private string $passwordConfirmation;
 
     public function __construct(int $id, string $password, string $passwordConfirmation)
     {
@@ -15,7 +15,7 @@ class PasswordInputData
         $this->password = $password;
         $this->passwordConfirmation = $passwordConfirmation;
     }
-    
+
     public function getId(): int
     {
         return $this->id;

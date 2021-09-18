@@ -1,12 +1,16 @@
 <?php
+declare(strict_types=1);
+
+namespace ASPTest\Domain\UseCase;
 
 use ASPTest\Domain\Entity\User;
 use ASPTest\Domain\Repository\UserRepository;
+use ASPTest\Domain\UseCase\Data\UserInputData;
+use ASPTest\Domain\UseCase\Data\UserOutputData;
 
 class CreateNewUser
 {
-    /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {

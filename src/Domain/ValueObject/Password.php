@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace ASPTest\Domain\ValueObject;
 
@@ -21,16 +22,11 @@ class Password
         $this->value = crypt($value, $this->generateSalt($value));
     }
 
-    public function getValue(): ?int
-    {
-        return $this->value;
-    }
-
     private function generateSalt(string $value): string
     {
         $mcrypt = $this->generateHashMcrypt($value);
         $hashMcrypt = base64_encode($mcrypt);
-        
+
         return sprintf('$2a$%d$%s',
             $this->cost,
             substr(strtr($hashMcrypt, '+', '.'), 0, 22)
@@ -40,5 +36,10 @@ class Password
     private function generateHashMcrypt(string $value): string
     {
         return mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $this->key, $value, MCRYPT_MODE_ECB);
+    }
+
+    public function getValue(): ?int
+    {
+        return $this->value;
     }
 }

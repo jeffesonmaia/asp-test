@@ -7,4 +7,6 @@ RUN pecl install mcrypt
 RUN docker-php-ext-enable mcrypt
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-COPY . /usr/src/asp-test
+WORKDIR /usr/src/asp-tes
+COPY . /usr/src/asp-tes
+RUN chmod +x ASP-TEST

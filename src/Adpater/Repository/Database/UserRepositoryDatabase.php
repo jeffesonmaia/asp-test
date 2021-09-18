@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace ASPTest\Adapter\Repository\Database;
 
@@ -7,8 +8,7 @@ use ASPTest\Domain\Repository\UserRepository;
 
 class UserRepositoryDatabase implements UserRepository
 {
-    /** @var \PDO */
-    private $pdo;
+    private \PDO $pdo;
 
     public function __construct(\PDO $pdo)
     {

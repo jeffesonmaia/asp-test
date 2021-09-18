@@ -1,11 +1,14 @@
 <?php
+declare(strict_types=1);
+
+namespace ASPTest\Domain\UseCase;
 
 use ASPTest\Domain\Repository\UserRepository;
+use ASPTest\Domain\UseCase\Data\PasswordInputData;
 
 class CreatePassword
 {
-    /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {

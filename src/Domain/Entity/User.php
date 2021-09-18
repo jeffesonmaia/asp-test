@@ -10,18 +10,12 @@ use ASPTest\Domain\ValueObject\Password;
 
 class User
 {
-    /** @var int */
-    private $id;
-    /** @var Name */
-    private $firstName;
-    /** @var Name */
-    private $lastName;
-    /** @var Email */
-    private $email;
-    /** @var Age */
-    private $age;
-    /** @var Password */
-    private $password;
+    private ?int $id;
+    private Name $firstName;
+    private Name $lastName;
+    private Email $email;
+    private Age $age;
+    private Password $password;
 
     public function __construct(?int $id, string $firstName, string $lastName, string $email, ?int $age)
     {

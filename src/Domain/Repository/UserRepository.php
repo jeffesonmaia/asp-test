@@ -8,6 +8,8 @@ use ASPTest\Domain\Entity\User;
 interface UserRepository
 {
     function save(User $user): User;
+
     function getById(int $id): User;
+
     function updatePassword(User $user): User;
 }
