@@ -3,34 +3,31 @@
 namespace ASPTest\Tests\Domain\UseCase;
 
 use ASPTest\Adapter\Repository\Database\UserRepositoryDatabase;
-use ASPTest\Domain\Repository\UserRepository;
 use ASPTest\Domain\UseCase\CreateNewUser;
-use ASPTest\Domain\UseCase\Data\UserInputData;
-use DI\Container;
+use ASPTest\Domain\UseCase\Data\CreateUserInputData;
+use PDO;
+use Phinx\Config\Config;
+use Phinx\Console\PhinxApplication;
+use Phinx\Migration\Manager;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\NullOutput;
 
 class CreateNewUserTest extends TestCase
 {
-    /** @var UserRepository */
-    private $userRepository;
-    /** @var \PDO */
-    private $pdo;
-    /** @var Container */
-    private $container;
-    /** @var CreateNewUser */
-    private $createUser;
 
     public function setUp()
     {
-        $this->userRepository = $this->prophesize(UserRepository::class)->reveal();
-        var_dump($this->userRepository instanceof UserRepositoryDatabase);
-        $this->createUser = new CreateNewUser($this->userRepository);
-//        $this->pdo = $this->prophesize(\PDO::class);
+        $container = require __DIR__ . '/Container/bootstrap.php';
     }
 
     public function testCreateNewUser()
     {
-        $input = new UserInputData('Jeffeson', "Pinheiro", 'mail@mail.com', null);
-        $this->createUser->execute($input);
+        $input = CreateUserInputData::create(['firstName' => 'Jeffeson', 'lastName' => 'Pinheiro', 'email' => 'mail@mail.com']);
+        $user = $this->creatNewUser->execute($input);
+        $this->assertEquals('Jeffeson', $user->getFirstName());
+        $this->assertEquals('Pinheiro', $user->getLastName());
+        $this->assertEquals('mail@mail.com', $user->getEmail());
+        $this->assertNull($user->getAge());
     }
 }

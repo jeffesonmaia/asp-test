@@ -5,7 +5,7 @@ namespace ASPTest\Domain\UseCase;
 
 use ASPTest\Domain\Entity\User;
 use ASPTest\Domain\Repository\UserRepository;
-use ASPTest\Domain\UseCase\Data\UserInputData;
+use ASPTest\Domain\UseCase\Data\CreateUserInputData;
 use ASPTest\Domain\UseCase\Data\UserOutputData;
 
 class CreateNewUser
@@ -17,14 +17,11 @@ class CreateNewUser
         $this->userRepository = $userRepository;
     }
 
-    public function execute(UserInputData $createUserInputData): UserOutputData
+    public function execute(CreateUserInputData $createUserInputData): UserOutputData
     {
         $user = new User(
             null,
-            $createUserInputData->getFirstName(),
-            $createUserInputData->getLastName(),
-            $createUserInputData->getEmail(),
-            $createUserInputData->getAge()
+            $createUserInputData
         );
         $this->userRepository->save($user);
 

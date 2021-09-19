@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace ASPTest\Domain\UseCase;
 
 use ASPTest\Domain\Repository\UserRepository;
-use ASPTest\Domain\UseCase\Data\PasswordInputData;
+use ASPTest\Domain\UseCase\Data\CreatePasswordInputData;
 
 class CreateUserPassword
 {
@@ -15,7 +15,7 @@ class CreateUserPassword
         $this->userRepository = $userRepository;
     }
 
-    public function execute(PasswordInputData $passwordInputData): void
+    public function execute(CreatePasswordInputData $passwordInputData): void
     {
         $user = $this->userRepository->getById($passwordInputData->getId());
         $user->setPassword($passwordInputData->getPassword(), $passwordInputData->getPasswordConfirmation());

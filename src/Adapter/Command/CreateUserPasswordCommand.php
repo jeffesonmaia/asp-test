@@ -3,7 +3,7 @@
 namespace ASPTest\Adapter\Command;
 
 use ASPTest\Domain\UseCase\CreateUserPassword;
-use ASPTest\Domain\UseCase\Data\PasswordInputData;
+use ASPTest\Domain\UseCase\Data\CreatePasswordInputData;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -42,7 +42,7 @@ class CreateUserPasswordCommand extends Command
         }
     }
 
-    private function getAnswers(InputInterface $input, OutputInterface $output): PasswordInputData
+    private function getAnswers(InputInterface $input, OutputInterface $output): CreatePasswordInputData
     {
         $id = $input->getArgument('ID');
         $helper = $this->getHelper('question');
@@ -71,6 +71,6 @@ class CreateUserPasswordCommand extends Command
         $question->setMaxAttempts(10);
         $passwordConfirmation = $helper->ask($input, $output, $question);
 
-        return new PasswordInputData($id, $password, $passwordConfirmation);
+        return new CreatePasswordInputData($id, $password, $passwordConfirmation);
     }
 }

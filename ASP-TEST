@@ -10,18 +10,7 @@ use ASPTest\Domain\UseCase\CreateUserPassword;
 use DI\ContainerBuilder;
 use Symfony\Component\Console\Application;
 
-$containerBuilder = new ContainerBuilder();
-$config = require __DIR__ . '/config.php';
-$config($containerBuilder);
-
-$settings = require __DIR__ . '/dependencies.php';
-$settings($containerBuilder);
-
-$repositories = require __DIR__ . '/repositories.php';
-$repositories($containerBuilder);
-
-$container = $containerBuilder->build();
-
+$container = require_once __DIR__ . '/config/container.php';
 $container->get(CreateNewUser::class);
 $application = new Application();
 $application->add(new CreateNewUserCommand(

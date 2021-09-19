@@ -3,7 +3,7 @@
 namespace ASPTest\Adapter\Command;
 
 use ASPTest\Domain\UseCase\CreateNewUser;
-use ASPTest\Domain\UseCase\Data\UserInputData;
+use ASPTest\Domain\UseCase\Data\CreateUserInputData;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -40,46 +40,27 @@ class CreateNewUserCommand extends Command
         }
     }
 
-    private function getAnswers(InputInterface $input, OutputInterface $output): UserInputData
+    private function getAnswers(InputInterface $input, OutputInterface $output): CreateUserInputData
     {
         $helper = $this->getHelper('question');
         $question = new Question('Qual o nome?');
-        $question->setValidator(function ($firstName) {
-            if (strlen($firstName) === 0) {
-                throw new \RuntimeException(
-                    'O nome é obrigatório'
-                );
-            }
-            return $firstName;
-        });
         $question->setMaxAttempts(2);
-        $name = $helper->ask($input, $output, $question);
+        $firstName = $helper->ask($input, $output, $question);
         $question = new Question('Qual o sobrenome?');
-        $question->setValidator(function ($lastName) {
-            if (strlen($lastName) === 0) {
-                throw new \RuntimeException(
-                    'O sobrenome é obrigatório'
-                );
-            }
-            return $lastName;
-        });
         $question->setMaxAttempts(2);
         $lastName = $helper->ask($input, $output, $question);
         $question = new Question('Qual o email? ');
-        $question->setValidator(function ($email) {
-            if (strlen($email) === 0) {
-                throw new \RuntimeException(
-                    'O email é obrigatório'
-                );
-            }
-            return $email;
-        });
         $question->setMaxAttempts(2);
         $email = $helper->ask($input, $output, $question);
         $question = new Question('Qual a idade (opcional)? ', null);
         $question->setMaxAttempts(2);
         $age = $helper->ask($input, $output, $question);
 
-        return new UserInputData($name, $lastName, $email, $age);
+        return CreateUserInputData::create([
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'email' => $email,
+            'age' => $age
+        ]);
     }
 }
