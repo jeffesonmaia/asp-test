@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace ASPTest\Domain\ValueObject;
 
+use ASPTest\Domain\Exception\InvalidAgeException;
+
 class Age
 {
     /** @var int|null */
@@ -11,7 +13,7 @@ class Age
     public function __construct(?int $value = null)
     {
         if ($value !== null && $value < 0 || $value > 150) {
-            throw new \Error('Idade inválida');
+            throw new InvalidAgeException();
         }
         $this->value = $value;
     }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace ASPTest\Domain\ValueObject;
 
+use ASPTest\Domain\Exception\InvalidNameException;
+
 class Name
 {
     /** @var string */
@@ -11,7 +13,7 @@ class Name
     public function __construct(string $value)
     {
         if (strlen($value) < 2 || strlen($value) > 35) {
-            throw new \Error('O nome deve conter no mínimo 2 caracters.');
+            throw new InvalidNameException();
         }
         $this->value = $value;
     }
