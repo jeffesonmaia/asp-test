@@ -25,6 +25,7 @@
     "php-di/php-di": "^6.3",
     "robmorgan/phinx": "^0.12.8",
     "ext-pdo": "*",
-    "symfony/console": "^5.3"
+    "symfony/console": "^5.3",
+    "ext-json": "*"
   }
 }

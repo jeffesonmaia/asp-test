@@ -1,14 +1,13 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-use ASPTest\Adapter\Repository\Database\UserRepositoryDatabase;
+use ASPTest\Adapter\Command\CreateNewUserCommand;
+use ASPTest\Domain\UseCase\CreateNewUser;
 use DI\ContainerBuilder;
+use Symfony\Component\Console\Application;
 
 
 $containerBuilder = new ContainerBuilder();
-$containerBuilder->useAutowiring(false);
-$containerBuilder->useAnnotations(false);
-
 // Set up settings
 $config = require __DIR__ . '/config.php';
 $config($containerBuilder);
@@ -23,5 +22,9 @@ $repositories($containerBuilder);
 
 $container = $containerBuilder->build();
 
-$config = $container->get(UserRepositoryDatabase::class);
-var_dump($config);
+$container->get(CreateNewUser::class);
+$application = new Application();
+$application->add(new CreateNewUserCommand(
+    $container->get(CreateNewUser::class),
+));
+$application->run();

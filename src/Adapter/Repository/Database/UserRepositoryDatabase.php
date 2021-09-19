@@ -1,20 +1,19 @@
 <?php
-declare(strict_types=1);
 
 namespace ASPTest\Adapter\Repository\Database;
 
 use ASPTest\Domain\Entity\User;
 use ASPTest\Domain\Repository\UserRepository;
+use PDO;
 
 class UserRepositoryDatabase implements UserRepository
 {
-    private \PDO $pdo;
+    private PDO $pdo;
 
-    public function __construct(\PDO $pdo)
+    public function __construct(PDO $pdo)
     {
         $this->pdo = $pdo;
     }
-
 
     /**
      * @throws \Exception
@@ -43,34 +42,11 @@ class UserRepositoryDatabase implements UserRepository
 
     function getById(int $id): User
     {
-        $sql = "SELECT id, first_name, last_name, email, age FROM user WHERE ID = ?";
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute([$id]);
-        $result = $statement->fetch(\PDO::FETCH_ASSOC);
-        if (!$result) {
-            throw new \InvalidArgumentException("Usuário não encontrado");
-        }
-
-        return new User(
-            $result['id'],
-            $result['first_name'],
-            $result['last_name'],
-            $result['email'],
-            $result['age'] ?? null
-        );
+        // TODO: Implement getById() method.
     }
 
     function updatePassword(User $user): User
     {
-        $sql = "UPDATE user SET password = ? WHERE id = ?";
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute([
-            $user->getPassword(),
-        ]);
-        if (!$this->pdo->lastInsertId()) {
-            throw new \RuntimeException('Erro ao salvar o password do usuário');
-        }
-
-        return $user;
+        // TODO: Implement updatePassword() method.
     }
 }

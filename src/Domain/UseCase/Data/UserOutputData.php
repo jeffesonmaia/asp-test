@@ -2,7 +2,9 @@
 
 namespace ASPTest\Domain\UseCase\Data;
 
-class UserOutputData
+use JsonSerializable;
+
+class UserOutputData implements JsonSerializable
 {
     private int $id;
     private string $firstName;
@@ -42,5 +44,16 @@ class UserOutputData
     public function getAge(): ?int
     {
         return $this->age;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->getLastName(),
+            'lastName' => $this->getLastName(),
+            'email' => $this->getEmail(),
+            'age' => $this->getAge()
+        ];
     }
 }

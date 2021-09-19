@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
 
-use ASPTest\Adapter\Repository\UserRepositoryDatabase;
+use ASPTest\Adapter\Repository\Database\UserRepositoryDatabase;
+use ASPTest\Domain\Repository\UserRepository;
+use ASPTest\Domain\UseCase\CreateNewUser;
 use DI\ContainerBuilder;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
-//        UserRepositoryDatabase::class => function (ContainerInterface $container) {
-//            $userRepositoryDatabase = new UserRepositoryDatabase($container->get(PDO::class));
-//            var_dump($userRepositoryDatabase);
-//            return $userRepositoryDatabase;
-//        },
-        UserRepositoryDatabase::class => DI\create()
-            ->constructor(DI\get(PDO::class)),
+        UserRepository::class => DI\create(UserRepositoryDatabase::class)
+            ->constructor(Di\get(PDO::class)),
+        CreateNewUser::class => DI\create(CreateNewUser::class)
+            ->constructor(Di\get(UserRepository::class)),
     ]);
 };
