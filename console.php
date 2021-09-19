@@ -2,21 +2,19 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use ASPTest\Adapter\Command\CreateNewUserCommand;
+use ASPTest\Adapter\Command\CreateUserPasswordCommand;
 use ASPTest\Domain\UseCase\CreateNewUser;
+use ASPTest\Domain\UseCase\CreateUserPassword;
 use DI\ContainerBuilder;
 use Symfony\Component\Console\Application;
 
-
 $containerBuilder = new ContainerBuilder();
-// Set up settings
 $config = require __DIR__ . '/config.php';
 $config($containerBuilder);
 
-// Set up settings
 $settings = require __DIR__ . '/dependencies.php';
 $settings($containerBuilder);
 
-// Set up settings
 $repositories = require __DIR__ . '/repositories.php';
 $repositories($containerBuilder);
 
@@ -26,5 +24,8 @@ $container->get(CreateNewUser::class);
 $application = new Application();
 $application->add(new CreateNewUserCommand(
     $container->get(CreateNewUser::class),
+));
+$application->add(new CreateUserPasswordCommand(
+    $container->get(CreateUserPassword::class),
 ));
 $application->run();

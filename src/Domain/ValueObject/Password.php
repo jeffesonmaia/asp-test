@@ -5,11 +5,9 @@ namespace ASPTest\Domain\ValueObject;
 
 class Password
 {
-    private $key = 'ASPTest';
-    private $cost = 10;
-
-    /** @var string */
-    private $value;
+    private string $key = 'JASPTest19092021';
+    private int $cost = 10;
+    private ?string $value;
 
     public function __construct(string $value, string $valueConfirmation)
     {
@@ -38,7 +36,7 @@ class Password
         return mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $this->key, $value, MCRYPT_MODE_ECB);
     }
 
-    public function getValue(): ?int
+    public function getValue(): ?string
     {
         return $this->value;
     }

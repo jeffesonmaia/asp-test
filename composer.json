@@ -26,6 +26,7 @@
     "robmorgan/phinx": "^0.12.8",
     "ext-pdo": "*",
     "symfony/console": "^5.3",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-mcrypt": "*"
   }
 }

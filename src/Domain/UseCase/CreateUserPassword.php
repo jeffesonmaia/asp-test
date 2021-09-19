@@ -6,7 +6,7 @@ namespace ASPTest\Domain\UseCase;
 use ASPTest\Domain\Repository\UserRepository;
 use ASPTest\Domain\UseCase\Data\PasswordInputData;
 
-class CreatePassword
+class CreateUserPassword
 {
     private UserRepository $userRepository;
 

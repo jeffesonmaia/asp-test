@@ -42,11 +42,35 @@ class UserRepositoryDatabase implements UserRepository
 
     function getById(int $id): User
     {
-        // TODO: Implement getById() method.
+        $sql = "SELECT id, first_name, last_name, email, age FROM user WHERE ID = ?";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([$id]);
+        $result = $statement->fetch(\PDO::FETCH_ASSOC);
+        if (!$result) {
+            throw new \InvalidArgumentException("Usuário não encontrado");
+        }
+
+        return new User(
+            $result['id'],
+            $result['first_name'],
+            $result['last_name'],
+            $result['email'],
+            $result['age'] ?? null
+        );
     }
 
     function updatePassword(User $user): User
     {
-        // TODO: Implement updatePassword() method.
+        $sql = "UPDATE user SET password = ? WHERE id = ?";
+        $statement = $this->pdo->prepare($sql);
+        $result = $statement->execute([
+            $user->getPassword()->getValue(),
+            $user->getId(),
+        ]);
+        if ($result === null) {
+            throw new \RuntimeException('Erro ao salvar o password do usuário');
+        }
+
+        return $user;
     }
 }

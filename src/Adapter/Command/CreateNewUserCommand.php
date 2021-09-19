@@ -11,13 +11,13 @@ use Symfony\Component\Console\Question\Question;
 
 class CreateNewUserCommand extends Command
 {
-    protected static $defaultName = 'USER-CREATE';
+    protected static $defaultName = 'USER:CREATE';
     private CreateNewUser $createNewUser;
 
-    public function __construct(CreateNewUser $createNewUser)
+    public function __construct(CreateNewUser $createUserPassword)
     {
         parent::__construct();
-        $this->createNewUser = $createNewUser;
+        $this->createNewUser = $createUserPassword;
     }
 
     protected function configure()
