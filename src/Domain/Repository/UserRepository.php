@@ -11,5 +11,5 @@ interface UserRepository
 
     function getById(int $id): User;
 
-    function updatePassword(User $user): User;
+    function updatePassword(User $user): bool;
 }

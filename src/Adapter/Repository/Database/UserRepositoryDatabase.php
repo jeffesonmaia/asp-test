@@ -3,6 +3,7 @@
 namespace ASPTest\Adapter\Repository\Database;
 
 use ASPTest\Domain\Entity\User;
+use ASPTest\Domain\Exception\UserNotFoundException;
 use ASPTest\Domain\Repository\UserRepository;
 use PDO;
 
@@ -40,6 +41,9 @@ class UserRepositoryDatabase implements UserRepository
         }
     }
 
+    /**
+     * @throws UserNotFoundException
+     */
     function getById(int $id): User
     {
         $sql = "SELECT id, first_name, last_name, email, age FROM user WHERE ID = ?";
@@ -47,7 +51,7 @@ class UserRepositoryDatabase implements UserRepository
         $statement->execute([$id]);
         $result = $statement->fetch(\PDO::FETCH_ASSOC);
         if (!$result) {
-            throw new \InvalidArgumentException("Usuário não encontrado");
+            throw new UserNotFoundException("Usuário não encontrado");
         }
 
         return new User(
@@ -59,7 +63,7 @@ class UserRepositoryDatabase implements UserRepository
         );
     }
 
-    function updatePassword(User $user): User
+    function updatePassword(User $user): bool
     {
         $sql = "UPDATE user SET password = ? WHERE id = ?";
         $statement = $this->pdo->prepare($sql);
@@ -71,6 +75,6 @@ class UserRepositoryDatabase implements UserRepository
             throw new \RuntimeException('Erro ao salvar o password do usuário');
         }
 
-        return $user;
+        return true;
     }
 }

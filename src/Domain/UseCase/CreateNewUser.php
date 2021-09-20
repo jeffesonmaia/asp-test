@@ -21,7 +21,10 @@ class CreateNewUser
     {
         $user = new User(
             null,
-            $createUserInputData
+            $createUserInputData->getFirstName(),
+            $createUserInputData->getLastName(),
+            $createUserInputData->getEmail(),
+            $createUserInputData->getAge()
         );
         $this->userRepository->save($user);
 

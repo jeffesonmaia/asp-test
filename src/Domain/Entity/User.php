@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace ASPTest\Domain\Entity;
 
-use ASPTest\Domain\UseCase\Data\CreateUserInputData;
 use ASPTest\Domain\ValueObject\Age;
 use ASPTest\Domain\ValueObject\Email;
 use ASPTest\Domain\ValueObject\Name;
@@ -18,13 +17,13 @@ class User
     private Age $age;
     private Password $password;
 
-    public function __construct(?int $id, CreateUserInputData $createUserInputData)
+    public function __construct(?int $id, string $firstName, string $lastName, string $email, ?int $age)
     {
         $this->id = $id;
-        $this->firstName = new Name($createUserInputData->getFirstName());
-        $this->lastName = new Name($createUserInputData->getLastName());
-        $this->email = new Email($createUserInputData->getEmail());
-        $this->age = new Age($createUserInputData->getAge());
+        $this->firstName = new Name($firstName);
+        $this->lastName = new Name($lastName);
+        $this->email = new Email($email);
+        $this->age = new Age($age);
     }
 
     public function setId(int $id): void

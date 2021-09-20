@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace ASPTest\Domain\ValueObject;
 
+use ASPTest\Domain\Exception\InvalidPasswordException;
+
 class Password
 {
     private string $key = 'JASPTest19092021';
@@ -12,10 +14,10 @@ class Password
     public function __construct(string $value, string $valueConfirmation)
     {
         if (!preg_match('/^\S*(?=\S{6,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[^\w])\S*$/', $value)) {
-            throw new \Error('A senha deve conter no mínimo 6 caracteres, uma letra maiúscula, um número, e um caractere especial');
+            throw new InvalidPasswordException('A senha deve conter no mínimo 6 caracteres, uma letra maiúscula, um número, e um caractere especial');
         }
         if ($value !== $valueConfirmation) {
-            throw new \Error('A senha e confirmação de senha devem ser iguais');
+            throw new InvalidPasswordException('A senha e confirmação de senha devem ser iguais');
         }
         $this->value = crypt($value, $this->generateSalt($value));
     }

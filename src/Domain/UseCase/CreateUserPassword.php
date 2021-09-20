@@ -15,10 +15,10 @@ class CreateUserPassword
         $this->userRepository = $userRepository;
     }
 
-    public function execute(CreatePasswordInputData $passwordInputData): void
+    public function execute(CreatePasswordInputData $passwordInputData): bool
     {
         $user = $this->userRepository->getById($passwordInputData->getId());
         $user->setPassword($passwordInputData->getPassword(), $passwordInputData->getPasswordConfirmation());
-        $this->userRepository->updatePassword($user);
+        return $this->userRepository->updatePassword($user);
     }
 }
