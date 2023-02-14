@@ -1,0 +1,32 @@
+{
+  "name": "jeffesonmaia/asp-test",
+  "description": "User CLI",
+  "authors": [
+    {
+      "name": "Jeffeson Pinheiro",
+      "email": "jeffeson.maia.pinheiro@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ASPTest\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.4"
+  },
+  "require": {
+    "fzaninotto/faker": "^1.9",
+    "php-di/php-di": "^6.3",
+    "robmorgan/phinx": "^0.12.8",
+    "ext-pdo": "*",
+    "symfony/console": "^5.3",
+    "ext-json": "*",
+    "ext-mcrypt": "*"
+  }
+}

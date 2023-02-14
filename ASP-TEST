@@ -1,0 +1,22 @@
+#!/usr/local/bin/php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use ASPTest\Adapter\Command\CreateNewUserCommand;
+use ASPTest\Adapter\Command\CreateUserPasswordCommand;
+use ASPTest\Domain\UseCase\CreateNewUser;
+use ASPTest\Domain\UseCase\CreateUserPassword;
+use DI\ContainerBuilder;
+use Symfony\Component\Console\Application;
+
+$container = require_once __DIR__ . '/config/container.php';
+$container->get(CreateNewUser::class);
+$application = new Application();
+$application->add(new CreateNewUserCommand(
+    $container->get(CreateNewUser::class),
+));
+$application->add(new CreateUserPasswordCommand(
+    $container->get(CreateUserPassword::class),
+));
+$application->run();
